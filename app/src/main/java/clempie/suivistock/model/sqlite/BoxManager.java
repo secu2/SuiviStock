@@ -19,7 +19,7 @@ public class BoxManager {
     public static final String CREATE_TABLE_BOX = "CREATE TABLE " + TABLE_NAME +
             " (" +
             " " + KEY_BOX_ID + " INTEGER primary key," +
-            " " + KEY_BOX_NAME + " TEXT" +
+            " " + KEY_BOX_NAME + " VARCHAR2(256)" +
             ");";
 
     private MySQLite mySQLite;
