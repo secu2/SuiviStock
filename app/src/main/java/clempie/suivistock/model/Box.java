@@ -7,7 +7,6 @@ public class Box {
 
     private int box_id;
     private String box_name;
-    private String box_place;
 
     public Box(int id, String name) {
         this.box_id = id;

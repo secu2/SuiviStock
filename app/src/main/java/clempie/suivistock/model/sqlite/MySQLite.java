@@ -8,10 +8,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import clempie.suivistock.model.Content;
+
 public class MySQLite extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "db.suivistock";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static MySQLite sInstance;
 
     public static synchronized MySQLite getInstance(Context context) {
@@ -28,6 +30,9 @@ public class MySQLite extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(BoxManager.CREATE_TABLE_BOX);
+        sqLiteDatabase.execSQL(CategoryManager.CREATE_TABLE_CATEGORY);
+        sqLiteDatabase.execSQL(ReferenceManager.CREATE_TABLE_REFERENCE);
+        sqLiteDatabase.execSQL(ContentManager.CREATE_TABLE_CONTENT);
     }
 
     @Override
