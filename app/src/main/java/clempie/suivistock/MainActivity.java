@@ -1,5 +1,6 @@
 package clempie.suivistock;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -38,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Toast.makeText(MainActivity.this, "" + position,
-                        Toast.LENGTH_SHORT).show();
+                Intent boxIndex = new Intent(MainActivity.this, BoxIndex.class);
+                startActivity(boxIndex);
             }
         });
 
@@ -63,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
