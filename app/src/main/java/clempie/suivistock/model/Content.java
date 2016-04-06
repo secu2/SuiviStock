@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Content {
 
-    private int content_id;
+    private long content_id;
     private int content_quantity;
     private Date content_date;
     private Box content_box;
@@ -21,11 +21,11 @@ public class Content {
         this.content_reference = reference;
     }
 
-    public int getId() {
+    public long getId() {
         return content_id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.content_id = id;
     }
 
@@ -59,5 +59,16 @@ public class Content {
 
     public void setReference(Reference content_reference) {
         this.content_reference = content_reference;
+    }
+
+    @Override
+    public String toString() {
+        return "Content{" +
+                "content_id=" + content_id +
+                ", content_quantity=" + content_quantity +
+                ", content_date=" + content_date +
+                ", content_box=" + content_box +
+                ", content_reference=" + content_reference +
+                '}';
     }
 }

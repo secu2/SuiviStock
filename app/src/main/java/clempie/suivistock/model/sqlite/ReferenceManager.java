@@ -13,7 +13,7 @@ import clempie.suivistock.model.Reference;
 
 public class ReferenceManager {
 
-    public static final String TABLE_NAME = "reference";
+    public static final String TABLE_NAME = "reference_product";
     public static final String KEY_REFERENCE_ID = "reference_id";
     public static final String KEY_REFERENCE_NAME = "reference_name";
     public static final String KEY_REFERENCE_IMAGE = "reference_image";
@@ -45,7 +45,7 @@ public class ReferenceManager {
 
     public ReferenceManager(Context context) {
         mySQLite = MySQLite.getInstance(context);
-        context = context;
+        this.context = context;
     }
 
     public void open() {
@@ -81,7 +81,7 @@ public class ReferenceManager {
     }
 
     public Reference getReference(int id) {
-        Reference reference = new Reference(0, "");
+        Reference reference = new Reference(0);
 
         CategoryManager categoryM = new CategoryManager(context);
 

@@ -13,7 +13,7 @@ import clempie.suivistock.model.Content;
 public class MySQLite extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "db.suivistock";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
     private static MySQLite sInstance;
 
     public static synchronized MySQLite getInstance(Context context) {
