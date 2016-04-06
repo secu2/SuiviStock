@@ -15,7 +15,7 @@ import clempie.suivistock.model.Category;
 
 public class CategoryManager {
 
-    private static final String TABLE_NAME = "category";
+    public static final String TABLE_NAME = "category";
     public static final String KEY_CATEGORY_ID = "category_id";
     public static final String KEY_CATEGORY_NAME = "category_name";
     public static final String CREATE_TABLE_CATEGORY = "CREATE TABLE " + TABLE_NAME +

@@ -13,7 +13,7 @@ import clempie.suivistock.model.Box;
 
 public class BoxManager {
 
-    private static final String TABLE_NAME = "box";
+    public static final String TABLE_NAME = "box";
     public static final String KEY_BOX_ID = "box_id";
     public static final String KEY_BOX_NAME = "box_name";
     public static final String CREATE_TABLE_BOX = "CREATE TABLE " + TABLE_NAME +

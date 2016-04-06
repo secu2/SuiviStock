@@ -10,11 +10,15 @@ public class Content {
     private int content_id;
     private int content_quantity;
     private Date content_date;
+    private Box content_box;
+    private Reference content_reference;
 
-    public Content(int id, int quantity, Date date) {
+    public Content(int id, int quantity, Date date, Box box, Reference reference) {
         this.content_id = id;
         this.content_quantity = quantity;
         this.content_date = date;
+        this.content_box = box;
+        this.content_reference = reference;
     }
 
     public int getId() {
@@ -39,5 +43,21 @@ public class Content {
 
     public void setDate(Date content_date) {
         this.content_date = content_date;
+    }
+
+    public Box getBox() {
+        return content_box;
+    }
+
+    public void setBox(Box content_box) {
+        this.content_box = content_box;
+    }
+
+    public Reference getReference() {
+        return content_reference;
+    }
+
+    public void setReference(Reference content_reference) {
+        this.content_reference = content_reference;
     }
 }
