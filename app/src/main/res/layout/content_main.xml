@@ -12,8 +12,15 @@
     tools:context="clempie.suivistock.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
+    <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/homeTiles"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp"
+        android:numColumns="2"
+        android:gravity="center"
+        android:choiceMode="singleChoice"
+        android:clickable="false" />
 </RelativeLayout>

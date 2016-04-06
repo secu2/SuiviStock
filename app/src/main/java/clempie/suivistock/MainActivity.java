@@ -1,6 +1,5 @@
 package clempie.suivistock;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,21 +9,19 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import clempie.suivistock.model.Box;
-import clempie.suivistock.model.sqlite.BoxManager;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        test();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -34,26 +31,18 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
 
-    private void test(){
-        Log.d("Projet", "deff22");
-        BoxManager bm = new BoxManager(this);
-        bm.open();
-        bm.addBox(new Box(0, "Frigo"));
+        GridView gridview = (GridView) findViewById(R.id.homeTiles);
+        gridview.setAdapter(new ImageAdapter(this, gridview));
 
-        Cursor c = bm.getBox();
-        if (c.moveToFirst())
-        {
-            do {
-                Log.d("Projet",
-                        c.getInt(c.getColumnIndex(BoxManager.KEY_BOX_ID)) + "," +
-                                c.getString(c.getColumnIndex(BoxManager.KEY_BOX_NAME))
-                );
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                Toast.makeText(MainActivity.this, "" + position,
+                        Toast.LENGTH_SHORT).show();
             }
-            while (c.moveToNext());
-        }
-        c.close();
+        });
+
     }
 
     @Override
