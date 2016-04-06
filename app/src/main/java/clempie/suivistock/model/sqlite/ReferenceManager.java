@@ -13,7 +13,7 @@ import clempie.suivistock.model.Reference;
 
 public class ReferenceManager {
 
-    private static final String TABLE_NAME = "reference";
+    public static final String TABLE_NAME = "reference";
     public static final String KEY_REFERENCE_ID = "reference_id";
     public static final String KEY_REFERENCE_NAME = "reference_name";
     public static final String KEY_REFERENCE_IMAGE = "reference_image";
@@ -27,14 +27,25 @@ public class ReferenceManager {
     public static final String CREATE_TABLE_REFERENCE = "CREATE TABLE " + TABLE_NAME +
             " (" +
             " " + KEY_REFERENCE_ID + " INTEGER primary key," +
-            " " + KEY_REFERENCE_NAME + " VARCHAR2(256)" +
+            " " + KEY_REFERENCE_NAME + " VARCHAR2(256)," +
+            " " + KEY_REFERENCE_IMAGE + " VARCHAR2(256)," +
+            " " + KEY_REFERENCE_BRAND + " VARCHAR2(256)," +
+            " " + KEY_REFERENCE_CONDITIONING + " VARCHAR2(256)," +
+            " " + KEY_REFERENCE_QUANTITY + " INTEGER," +
+            " " + KEY_REFERENCE_WEIGHT + " INTEGER," +
+            " " + KEY_REFERENCE_BARCODE + " VARCHAR2(256)," +
+            " " + KEY_REFERENCE_PRICE + " INTEGER," +
+            " " + KEY_REFERENCE_CATEGORY + " INTEGER," +
+            " FOREIGN KEY(" + KEY_REFERENCE_CATEGORY + ") REFERENCES " + CategoryManager.TABLE_NAME + "(" + CategoryManager.KEY_CATEGORY_ID + ")" +
             ");";
 
     private MySQLite mySQLite;
     private SQLiteDatabase db;
+    private Context context;
 
     public ReferenceManager(Context context) {
         mySQLite = MySQLite.getInstance(context);
+        context = context;
     }
 
     public void open() {
@@ -72,10 +83,20 @@ public class ReferenceManager {
     public Reference getReference(int id) {
         Reference reference = new Reference(0, "");
 
+        CategoryManager categoryM = new CategoryManager(context);
+
         Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_REFERENCE_ID + "=" + id, null);
         if (c.moveToFirst()) {
             reference.setId(c.getInt(c.getColumnIndex(KEY_REFERENCE_ID)));
             reference.setName(c.getString(c.getColumnIndex(KEY_REFERENCE_NAME)));
+            reference.setImage(c.getString(c.getColumnIndex(KEY_REFERENCE_IMAGE)));
+            reference.setBrand(c.getString(c.getColumnIndex(KEY_REFERENCE_BRAND)));
+            reference.setConditioning(c.getString(c.getColumnIndex(KEY_REFERENCE_CONDITIONING)));
+            reference.setQuantity(c.getInt(c.getColumnIndex(KEY_REFERENCE_QUANTITY)));
+            reference.setWeight(c.getInt(c.getColumnIndex(KEY_REFERENCE_WEIGHT)));
+            reference.setBarcode(c.getString(c.getColumnIndex(KEY_REFERENCE_BARCODE)));
+            reference.setPrice(c.getInt(c.getColumnIndex(KEY_REFERENCE_PRICE)));
+            reference.setCategory(categoryM.getCategory(c.getInt(c.getColumnIndex(KEY_REFERENCE_CATEGORY))));
             c.close();
         }
 
