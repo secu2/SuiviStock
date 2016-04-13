@@ -33,7 +33,7 @@ public class ContentManager {
             " " + KEY_CONTENT_BOX + " INTEGER," +
             " " + KEY_CONTENT_REFERENCE + " INTEGER," +
             " FOREIGN KEY(" + KEY_CONTENT_BOX + ") REFERENCES " + BoxManager.TABLE_NAME + "(" + BoxManager.KEY_BOX_ID + ")," +
-            " FOREIGN KEY(" + KEY_CONTENT_REFERENCE + ") REFERENCES " + ReferenceManager.TABLE_NAME + "(" + ReferenceManager.KEY_REFERENCE_ID + ")," +
+            " FOREIGN KEY(" + KEY_CONTENT_REFERENCE + ") REFERENCES " + ReferenceManager.TABLE_NAME + "(" + ReferenceManager.KEY_REFERENCE_ID + ") " +
             ");";
 
     private MySQLite mySQLite;

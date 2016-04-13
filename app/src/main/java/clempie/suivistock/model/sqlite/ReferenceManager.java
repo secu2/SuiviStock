@@ -19,10 +19,10 @@ public class ReferenceManager {
     public static final String KEY_REFERENCE_IMAGE = "reference_image";
     public static final String KEY_REFERENCE_BRAND = "reference_brand";
     public static final String KEY_REFERENCE_CONDITIONING = "reference_conditioning";
-    public static final String KEY_REFERENCE_QUANTITY = "reference_name";
-    public static final String KEY_REFERENCE_WEIGHT = "reference_name";
-    public static final String KEY_REFERENCE_BARCODE = "reference_name";
-    public static final String KEY_REFERENCE_PRICE = "reference_name";
+    public static final String KEY_REFERENCE_QUANTITY = "reference_quantity";
+    public static final String KEY_REFERENCE_WEIGHT = "reference_weight";
+    public static final String KEY_REFERENCE_BARCODE = "reference_barcode";
+    public static final String KEY_REFERENCE_PRICE = "reference_price";
     public static final String KEY_REFERENCE_CATEGORY = "reference_category";
     public static final String CREATE_TABLE_REFERENCE = "CREATE TABLE " + TABLE_NAME +
             " (" +
