@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -56,6 +57,7 @@ public class BoxIndex extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
+                Log.d("Info.SCANRESULT", data.getStringExtra("SCAN_RESULT"));
                 String contents = data.getStringExtra("SCAN_RESULT");
             }
             /*if(resultCode == RESULT_CANCELLED){
