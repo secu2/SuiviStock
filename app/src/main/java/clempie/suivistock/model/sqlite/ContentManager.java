@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.Date;
 
@@ -32,7 +33,7 @@ public class ContentManager {
             " " + KEY_CONTENT_BOX + " INTEGER," +
             " " + KEY_CONTENT_REFERENCE + " INTEGER," +
             " FOREIGN KEY(" + KEY_CONTENT_BOX + ") REFERENCES " + BoxManager.TABLE_NAME + "(" + BoxManager.KEY_BOX_ID + ")," +
-            " FOREIGN KEY(" + KEY_CONTENT_REFERENCE + ") REFERENCES " + ReferenceManager.TABLE_NAME + "(" + ReferenceManager.KEY_REFERENCE_ID + ")," +
+            " FOREIGN KEY(" + KEY_CONTENT_REFERENCE + ") REFERENCES " + ReferenceManager.TABLE_NAME + "(" + ReferenceManager.KEY_REFERENCE_ID + ") " +
             ");";
 
     private MySQLite mySQLite;
@@ -41,7 +42,8 @@ public class ContentManager {
 
     public ContentManager(Context context) {
         mySQLite = MySQLite.getInstance(context);
-        context = context;
+        Log.d("Projet", "aaa");
+        this.context = context;
     }
 
     public void open() {
@@ -77,7 +79,7 @@ public class ContentManager {
     }
 
     public Content getContent(int id) {
-        Content content = new Content(0, 1, new Date(), new Box(0, ""), new Reference(0, ""));
+        Content content = new Content(0, 1, new Date(), new Box(0, ""), new Reference(0));
         BoxManager boxM = new BoxManager(context);
         ReferenceManager referenceM = new ReferenceManager(context);
 

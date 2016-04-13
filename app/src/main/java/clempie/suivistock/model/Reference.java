@@ -5,7 +5,7 @@ package clempie.suivistock.model;
  */
 public class Reference {
 
-    private int reference_id;
+    private long reference_id;
     private String reference_name;
     private String reference_image;
     private String reference_brand;
@@ -16,16 +16,28 @@ public class Reference {
     private int reference_price;
     private Category reference_category;
 
-    public Reference(int id, String name) {
-        this.reference_id = id;
-        this.reference_name = name;
+    public Reference(long reference_id) {
+        this.reference_id = reference_id;
     }
 
-    public int getId() {
+    public Reference(int reference_id, String reference_name, String reference_image, String reference_brand, String reference_conditioning, int reference_quantity, int reference_weight, String reference_barcode, int reference_price, Category reference_category) {
+        this.reference_id = reference_id;
+        this.reference_name = reference_name;
+        this.reference_image = reference_image;
+        this.reference_brand = reference_brand;
+        this.reference_conditioning = reference_conditioning;
+        this.reference_quantity = reference_quantity;
+        this.reference_weight = reference_weight;
+        this.reference_barcode = reference_barcode;
+        this.reference_price = reference_price;
+        this.reference_category = reference_category;
+    }
+
+    public long getId() {
         return reference_id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.reference_id = id;
     }
 
@@ -99,5 +111,21 @@ public class Reference {
 
     public void setCategory(Category reference_category) {
         this.reference_category = reference_category;
+    }
+
+    @Override
+    public String toString() {
+        return "Reference{" +
+                "reference_id=" + reference_id +
+                ", reference_name='" + reference_name + '\'' +
+                ", reference_image='" + reference_image + '\'' +
+                ", reference_brand='" + reference_brand + '\'' +
+                ", reference_conditioning='" + reference_conditioning + '\'' +
+                ", reference_quantity=" + reference_quantity +
+                ", reference_weight=" + reference_weight +
+                ", reference_barcode='" + reference_barcode + '\'' +
+                ", reference_price=" + reference_price +
+                ", reference_category=" + reference_category +
+                '}';
     }
 }

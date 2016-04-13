@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Category {
 
-    private int category_id;
+    private long category_id;
     private String category_name;
 
     public Category(int id, String name) {
@@ -15,11 +15,11 @@ public class Category {
         this.category_name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return category_id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.category_id = id;
     }
 
@@ -29,5 +29,13 @@ public class Category {
 
     public void setName(String name) {
         this.category_name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "category_id=" + category_id +
+                ", category_name='" + category_name + '\'' +
+                '}';
     }
 }
