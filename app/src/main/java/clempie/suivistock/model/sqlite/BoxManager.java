@@ -9,6 +9,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import clempie.suivistock.model.Box;
 
 public class BoxManager {
@@ -28,6 +30,8 @@ public class BoxManager {
     public BoxManager(Context context) {
         mySQLite = MySQLite.getInstance(context);
     }
+
+
 
     public void open() {
         db = mySQLite.getWritableDatabase();
@@ -74,9 +78,43 @@ public class BoxManager {
         return box;
     }
 
-    public Cursor getBox() {
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+    public Box getBox(String name) {
+        Box box = new Box(0, "");
+
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_BOX_NAME + "='" + name+"'", null);
+        if (c.moveToFirst()) {
+            box.setId(c.getInt(c.getColumnIndex(KEY_BOX_ID)));
+            box.setName(c.getString(c.getColumnIndex(KEY_BOX_NAME)));
+            c.close();
+        }
+
+        return box;
     }
+
+    public ArrayList<Box> getBox() {
+        ArrayList<Box> res = new ArrayList<Box>();
+        Cursor cursor = db.rawQuery("select * from "+TABLE_NAME,null);
+
+        if (cursor .moveToFirst()) {
+            while (cursor.isAfterLast() == false) {
+                res.add(getBox(cursor.getInt(cursor.getColumnIndex(KEY_BOX_ID))));
+                cursor.moveToNext();
+            }
+        }
+
+        res.add(new Box(999999999, "Nouvelle box"));
+        return res;
+    }
+
+    public int count(){
+        Cursor mCount= db.rawQuery("SELECT COUNT() FROM " + TABLE_NAME, null);
+        mCount.moveToFirst();
+        int count= mCount.getInt(0);
+        mCount.close();
+        return count;
+    }
+
+
 
 
 }

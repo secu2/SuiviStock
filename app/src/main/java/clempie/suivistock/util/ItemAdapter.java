@@ -1,4 +1,4 @@
-package clempie.suivistock;
+package clempie.suivistock.util;
 
 import android.content.Context;
 import android.util.Log;

@@ -1,9 +1,11 @@
 package clempie.suivistock.model;
 
+import java.io.Serializable;
+
 /**
  * Created by pierrick on 23/03/16.
  */
-public class Box {
+public class Box  implements Serializable {
 
     private long box_id;
     private String box_name;

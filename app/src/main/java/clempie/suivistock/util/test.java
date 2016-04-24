@@ -62,6 +62,7 @@ public class test {
 
         Log.d("Projet", co.toString());
 
+        Log.d("BoxCount", Integer.toString(bm.count()));
 
     }
 

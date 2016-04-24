@@ -1,10 +1,8 @@
-package clempie.suivistock;
+package clempie.suivistock.views;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,16 +11,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
+
+import clempie.suivistock.R;
+import clempie.suivistock.model.Box;
+import clempie.suivistock.model.Content;
+import clempie.suivistock.model.sqlite.BoxManager;
+import clempie.suivistock.model.sqlite.ContentManager;
 
 public class BoxIndex extends AppCompatActivity {
-
+    private Box box;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        box = (Box) getIntent().getSerializableExtra("box");
+        Log.d("BoxName", box.getName());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_box_index);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -39,14 +44,26 @@ public class BoxIndex extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ListView itemListView = (ListView)findViewById(R.id.listView);
-        ArrayList<String> itemList = new ArrayList<String>();
-        itemList.add("test1");
-        itemList.add("test2");
-        itemList.add("test3");
-        itemList.add("test4");
 
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemList);
+        BoxManager boxM = new BoxManager(BoxIndex.this);
+        boxM.open();
+
+        ContentManager contentM = new ContentManager(BoxIndex.this);
+        contentM.open();
+
+        ArrayList<Content> itemList = new ArrayList<>();
+        ArrayList<String> itemNameList = new ArrayList<>();
+        int index = 0;
+        for (Content item : itemList
+             ) {
+            itemNameList.add(itemList.get(index++).getReference().getName());
+
+        }
+
+        itemList = contentM.getContent(box);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemNameList);
         itemListView.setAdapter(arrayAdapter);
 
     }

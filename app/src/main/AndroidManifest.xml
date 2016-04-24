@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="clempie.suivistock">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BoxIndex"
+            android:name=".views.BoxIndex"
             android:label="@string/title_activity_box_index"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -27,8 +34,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="clempie.suivistock.MainActivity" />
         </activity>
+        <activity android:name=".NewItem" />
+        <activity android:name=".NewBox"></activity>
     </application>
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+
 </manifest>

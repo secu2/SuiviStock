@@ -10,12 +10,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import clempie.suivistock.model.Box;
 import clempie.suivistock.model.Content;
 import clempie.suivistock.model.Reference;
-import clempie.suivistock.util.Convert;
 
 public class ContentManager {
 
@@ -91,6 +91,24 @@ public class ContentManager {
             content.setBox(boxM.getBox(c.getInt(c.getColumnIndex(KEY_CONTENT_BOX))));
             content.setReference(referenceM.getReference(c.getInt(c.getColumnIndex(KEY_CONTENT_REFERENCE))));
             c.close();
+        }
+
+        return content;
+    }
+
+    public ArrayList<Content> getContent(Box box) {
+        ArrayList<Content> content = new ArrayList<>();
+        //Content content = new Content(0, 1, new Date(), new Box(0, ""), new Reference(0));
+        BoxManager boxM = new BoxManager(context);
+        ReferenceManager referenceM = new ReferenceManager(context);
+
+
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CONTENT_BOX + "=" + box.getId(), null);
+        if (c.moveToFirst()) {
+            while (c.isAfterLast() == false) {
+                content.add(getContent(c.getInt(c.getColumnIndex(KEY_CONTENT_ID))));
+                c.moveToNext();
+            }
         }
 
         return content;
