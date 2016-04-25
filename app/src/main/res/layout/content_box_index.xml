@@ -12,10 +12,20 @@
     tools:context=".views.BoxIndex"
     tools:showIn="@layout/activity_box_index">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/boxName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/listViewContent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/boxName" />
+
 </RelativeLayout>

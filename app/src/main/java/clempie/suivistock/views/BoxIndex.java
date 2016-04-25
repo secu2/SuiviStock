@@ -9,12 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
+import clempie.suivistock.NewBox;
+import clempie.suivistock.NewItem;
 import clempie.suivistock.R;
 import clempie.suivistock.model.Box;
 import clempie.suivistock.model.Content;
@@ -33,17 +36,25 @@ public class BoxIndex extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new IntentIntegrator(BoxIndex.this).initiateScan();
+                Intent newItemIntent = new Intent(BoxIndex.this, NewItem.class);
+                startActivityForResult(newItemIntent,2);
             }
 
         });
+        fab.setImageResource(android.R.drawable.ic_menu_add);*/
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ListView itemListView = (ListView)findViewById(R.id.listView);
+
+
+        TextView boxName = (TextView) findViewById(R.id.boxName);
+        boxName.setText(box.getName());
+
+        ListView itemListView = (ListView)findViewById(R.id.listViewContent);
 
 
         BoxManager boxM = new BoxManager(BoxIndex.this);

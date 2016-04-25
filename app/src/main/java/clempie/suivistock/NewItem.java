@@ -10,6 +10,16 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import java.sql.Ref;
+import java.util.ArrayList;
+
+import clempie.suivistock.model.Box;
+import clempie.suivistock.model.Category;
+import clempie.suivistock.model.Content;
+import clempie.suivistock.model.Reference;
+import clempie.suivistock.model.sqlite.BoxManager;
+import clempie.suivistock.model.sqlite.ContentManager;
+import clempie.suivistock.model.sqlite.ReferenceManager;
 import clempie.suivistock.util.BoxListAdapter;
 import clempie.suivistock.views.BoxIndex;
 
@@ -45,7 +55,32 @@ public class NewItem extends AppCompatActivity {
                 String ingredients = ingredientsField.getText().toString();
                 String remarques = remarquesField.getText().toString();
 
-                Log.d("New item res", "Name:"+name+" Unité:"+unite+" Catégorie:"+categorie);
+                BoxManager bm = new BoxManager(NewItem.this);
+                bm.open();
+                TextView tv = (TextView) v.findViewById(R.id.textView1);
+                Box currentBox = bm.getBox(tv.getText().toString());
+
+                ContentManager cm = new ContentManager(NewItem.this);
+                cm.open();
+
+
+
+                ReferenceManager rm = new ReferenceManager(NewItem.this);
+                rm.open();
+
+                Reference ref = null;
+
+                if(rm.isReference(name)){
+                    ref = rm.getReference(name);
+                }else{
+                    ref = new Reference(0, name, "", marque, "", 1, 1, "", Integer.parseInt(prixMoy),new Category(0, "none"));
+                    rm.addReference(ref);
+                }
+
+
+
+
+
             }
         });
     }

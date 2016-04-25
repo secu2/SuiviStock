@@ -9,6 +9,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
+import clempie.suivistock.model.Box;
+import clempie.suivistock.model.Category;
+import clempie.suivistock.model.Content;
 import clempie.suivistock.model.Reference;
 
 public class ReferenceManager {
@@ -101,6 +106,55 @@ public class ReferenceManager {
         }
 
         return reference;
+    }
+
+    public Reference getReference(String name) {
+        Category category = new Category(0, "none");
+        Reference reference = new Reference(0, "", "", "", "", 1, 0, "", 0, category);
+
+
+
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_REFERENCE_NAME + "='" + name+"'", null);
+        if (c.moveToFirst()) {
+
+            reference.setId(c.getInt(c.getColumnIndex(KEY_REFERENCE_ID)));
+            reference.setName(c.getString(c.getColumnIndex(KEY_REFERENCE_NAME)));
+            reference.setBarcode(c.getString(c.getColumnIndex(KEY_REFERENCE_BARCODE)));
+            reference.setBrand(c.getString(c.getColumnIndex(KEY_REFERENCE_BRAND)));
+            reference.setConditioning(c.getString(c.getColumnIndex(KEY_REFERENCE_CONDITIONING)));
+            reference.setImage(c.getString(c.getColumnIndex(KEY_REFERENCE_IMAGE)));
+            reference.setPrice(c.getInt(c.getColumnIndex(KEY_REFERENCE_PRICE)));
+            reference.setWeight(c.getInt(c.getColumnIndex(KEY_REFERENCE_WEIGHT)));
+            reference.setQuantity(c.getInt(c.getColumnIndex(KEY_REFERENCE_QUANTITY)));
+            //TODO Category
+            c.close();
+        }
+
+        return reference;
+    }
+
+    public ArrayList<Reference> getReferences() {
+        ArrayList<Reference> references = new ArrayList<>();
+        ReferenceManager referenceM = new ReferenceManager(context);
+
+
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        if (c.moveToFirst()) {
+            while (c.isAfterLast() == false) {
+                references.add(getReference(c.getInt(c.getColumnIndex(KEY_REFERENCE_ID))));
+                c.moveToNext();
+            }
+        }
+
+        return references;
+    }
+
+    public boolean isReference(String name){
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_REFERENCE_NAME + "='" + name+"'", null);
+        if (c.moveToFirst()) {
+            return true;
+        }
+        return false;
     }
 
     public Cursor getReference() {
