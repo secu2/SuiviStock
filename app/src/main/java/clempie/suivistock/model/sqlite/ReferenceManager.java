@@ -101,7 +101,7 @@ public class ReferenceManager {
             reference.setWeight(c.getInt(c.getColumnIndex(KEY_REFERENCE_WEIGHT)));
             reference.setBarcode(c.getString(c.getColumnIndex(KEY_REFERENCE_BARCODE)));
             reference.setPrice(c.getInt(c.getColumnIndex(KEY_REFERENCE_PRICE)));
-            reference.setCategory(categoryM.getCategory(c.getInt(c.getColumnIndex(KEY_REFERENCE_CATEGORY))));
+            reference.setCategory(new Category(0, null));
             c.close();
         }
 

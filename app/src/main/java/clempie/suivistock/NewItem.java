@@ -1,6 +1,9 @@
 package clempie.suivistock;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,56 +33,28 @@ public class NewItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
 
-        GridView gridview = (GridView) findViewById(R.id.conteneurs);
-        gridview.setAdapter(new BoxListAdapter(this, gridview));
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Nouveau"));
+        tabLayout.addTab(tabLayout.newTab().setText("Existant"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                //TODO Verifier champs et ajouter item
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final NewItemTabsAdapter adapter = new NewItemTabsAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
 
-                final EditText nameField = (EditText) findViewById(R.id.nomAliment);
-                final EditText uniteField = (EditText) findViewById(R.id.uniteAliment);
-                final EditText categorieField = (EditText) findViewById(R.id.categorieAliment);
-                final EditText marqueField = (EditText) findViewById(R.id.marqueAliment);
-                final EditText prixMoyField = (EditText) findViewById(R.id.prixMoyenAliment);
-                final EditText ingredientsField = (EditText) findViewById(R.id.ingredientsAliment);
-                final EditText remarquesField = (EditText) findViewById(R.id.remarquesAliment);
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
+            }
 
-                String name = nameField.getText().toString();
-                String unite = uniteField.getText().toString();
-                String categorie = categorieField.getText().toString();
-                String marque = marqueField.getText().toString();
-                String prixMoy = prixMoyField.getText().toString();
-                String ingredients = ingredientsField.getText().toString();
-                String remarques = remarquesField.getText().toString();
-
-                BoxManager bm = new BoxManager(NewItem.this);
-                bm.open();
-                TextView tv = (TextView) v.findViewById(R.id.textView1);
-                Box currentBox = bm.getBox(tv.getText().toString());
-
-                ContentManager cm = new ContentManager(NewItem.this);
-                cm.open();
-
-
-
-                ReferenceManager rm = new ReferenceManager(NewItem.this);
-                rm.open();
-
-                Reference ref = null;
-
-                if(rm.isReference(name)){
-                    ref = rm.getReference(name);
-                }else{
-                    ref = new Reference(0, name, "", marque, "", 1, 1, "", Integer.parseInt(prixMoy),new Category(0, "none"));
-                    rm.addReference(ref);
-                }
-
-
-
-
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
