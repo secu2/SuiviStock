@@ -12,8 +12,11 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import clempie.suivistock.model.Box;
 import clempie.suivistock.model.Category;
+import clempie.suivistock.model.Content;
 import clempie.suivistock.model.Reference;
 import clempie.suivistock.model.sqlite.BoxManager;
 import clempie.suivistock.model.sqlite.ContentManager;
@@ -75,8 +78,10 @@ public class NewItemTabCreateItem extends Fragment {
                 }else{
                     ref = new Reference(0, name, "", marque, "", 1, 1, "", Integer.parseInt(prixMoy),new Category(0, "none"));
                     rm.addReference(ref);
+                    cm.addContent(new Content(0, 1, new Date(), currentBox, ref));
                 }
 
+                getActivity().finish();
 
 
 
